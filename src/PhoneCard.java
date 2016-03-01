@@ -17,7 +17,7 @@ public class PhoneCard
 	// no-arguments constructor
 	public PhoneCard()
 	{
-		phoneNumber = "";
+		phoneNumber = "Not set yet";
 		balance = 0.0;
 	}
 	

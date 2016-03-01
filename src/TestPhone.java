@@ -20,6 +20,8 @@ public class TestPhone {
             System.out.println("Call failed");
         System.out.println("The balance is " + pc.getBalance());
         pc.topUp(10);
-        System.out.println("The balance is NOw " + pc.getBalance());
+        System.out.println("The balance is NOW " + pc.getBalance());
+        PhoneCard myFavouriteCard = new PhoneCard();
+        System.out.println("My new card is " + myFavouriteCard.toString());
     }
 }
