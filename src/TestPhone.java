@@ -12,7 +12,7 @@ public class TestPhone {
     public static void main(String[] args)
     {
         PhoneCard pc = new PhoneCard("012-5201314", 5.00);
-        System.out.println("New pgone card: " + pc.toString());
+        System.out.println("New phone card: " + pc.toString());
         boolean status = pc.makeCall(20, 0.30);
         if (status == true)
             System.out.println("Call successfully");
