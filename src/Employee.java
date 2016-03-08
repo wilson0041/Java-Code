@@ -73,7 +73,7 @@ public class Employee {
     }
     private void setHoursWorked(int hoursWorkedIn)
     {
-        if (hoursWorkedIn > 0)
+        if (hoursWorkedIn >= 0)
             hoursWorked = hoursWorkedIn;
     }
     @Override
