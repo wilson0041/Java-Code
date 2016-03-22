@@ -20,7 +20,7 @@ public class SumOfTen1
 		System.out.println();
 
 		int [] num = new int[SIZE];
-		int sum = 0, i, j = 0;
+		int sum = 0, i;
                 for(i = 0; i < 10; i++)
                 {
                     System.out.print("Enter integer " + (i + 1) + ": ");
