@@ -1,13 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Wilson5801
- */
 import java.util.*;
 public class ShopKeeper {
     
@@ -25,9 +15,9 @@ public class ShopKeeper {
             System.out.println("1) add an item to the shop");
             System.out.println("2) show all items in the shop");
             System.out.println("3) maintain item");
-            System.out.println("4) show the total price of all items");
-            System.out.println("5) show the most expensive item"); 
-            System.out.println("6) maintain < 5");
+            System.out.println("4) show the average price of all items");
+            System.out.println("5) show the most expensive item");       
+            System.out.println("6) maintain low stock items ");
             System.out.println("0) Quit");
             System.out.print("Enter your choice");
             choice = sc.nextInt();
@@ -37,8 +27,9 @@ public class ShopKeeper {
                 case 1: addItem(); break;
                 case 2: System.out.println(sh.getAll()); break;
                 case 3: maintainItem(); break;
-                case 4: System.out.println(sh.totalPrice()); break;
-                case 5: exp(); break;
+                case 4: System.out.print("Average price of all items is ");
+                        System.out.println(sh.averagePrice()); break;
+                case 5: showMostExpensive(); break;
                 case 6: lowStock(); break;
                 case 0: System.out.println("Goodbye!"); break;
                 default: System.out.println("Invalid choice"); break;
@@ -77,7 +68,7 @@ public class ShopKeeper {
             System.out.println("1. change name");
             System.out.println("2. change price");
             System.out.println("3. add stock");
-            System.out.println("4. sell item");
+            System.out.println("4. sell this item");
             int choice = sc.nextInt();
             sc.nextLine();
             if (choice == 1)
@@ -93,37 +84,59 @@ public class ShopKeeper {
                 sc.nextLine();
                 foundItem.setPrice(price);
             }
-            else if(choice ==3)
+            else if (choice == 3)
             {
-                System.out.println("enter quantity: ");
-                int quantity = sc.nextInt();
-                foundItem.addStock(quantity);
+                System.out.println("Enter quantity of stock to add");
+                int qty = sc.nextInt();
+                sc.nextLine();
+                foundItem.addStock(qty);
             }
             else if (choice == 4)
             {
-                System.out.println("enter quantity to sell: ");
-                int sell = sc.nextInt();
-                if (sell > foundItem.getQtyAvailable())
-                    System.out.println("too much");
+                System.out.println("Enter quantity to sell");
+                int sellQty = sc.nextInt();
+                sc.nextLine();
+                if (sellQty > foundItem.getQtyAvailable())
+                    System.out.println("Cannot sell more than stock available");
                 else
-                    foundItem.sell(sell);
+                    foundItem.sell(sellQty);
             }
-            else
+            else 
                 System.out.println("Invalid choice");
         }
     }
-    public static void exp()
+    
+    // display the most expensive item
+    public static void showMostExpensive()
     {
-            Item item = sh.mostExpensive();
-            if (item == null)
-                System.out.println("no items");
-            else
-                System.out.println(item.toString());
+        Item item = sh.mostExpensive();
+        if (item == null)
+            System.out.println("There are no items in the shop");
+        else
+        {
+            System.out.println("Most expensive item is ");
+            System.out.println(item.toString());
+        }
     }
+    
+    // maintain low stock items
     public static void lowStock()
     {
-        System.out.println("enter stock amount: ");
+        System.out.print("Enter stock amount to check :");
         int amount = sc.nextInt();
-        System.out.println(sh.getQtyLessThan(amount));
+        Item[] lowItem = sh.getQtyLessThan(amount);
+        if (lowItem == null)
+            System.out.println("No Low Stock Items");
+        else
+        {
+            for (int i = 0; i < lowItem.length; i++)
+            {
+                System.out.println(lowItem[i].toString());
+                System.out.print("Enter qty to add");
+                int qty = sc.nextInt();
+                sc.nextLine();
+                lowItem[i].addStock(qty);
+            }
+        }
     }
 }
